@@ -24,8 +24,11 @@ ActionServer::ActionServer()
 	QHttpServer *server = new QHttpServer(this);
 	connect(server, SIGNAL(newRequest(QHttpRequest*, QHttpResponse*)),
 		this, SLOT(handleRequest(QHttpRequest*, QHttpResponse*)));
-
-	server->listen(QHostAddress::Any, 8080);
+	/*
+	 * FYI - Address and Port are #define'd in "qhttpserver.h" 
+	 * Default is (QHostAddress::LocalHost, 8080)
+	 */
+	server->listen(LISTEN_ADDRESS, LISTEN_PORT);
 }
 
 void ActionServer::handleRequest(QHttpRequest *req, QHttpResponse *resp)
