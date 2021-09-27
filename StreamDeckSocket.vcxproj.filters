@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="QHttpServer Include">
+      <UniqueIdentifier>{b32790aa-cf86-4de3-9f5c-40fd0c564dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QHttpServer Source">
+      <UniqueIdentifier>{d1081784-c04a-4ec7-b12d-148ea55cb54c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QHttpServer MOC">
+      <UniqueIdentifier>{80e8ff67-97df-42d5-b202-331c021af243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HTTP Parser">
+      <UniqueIdentifier>{34a49a4c-45de-4e9b-aa20-50f64ade5cf5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streamdecksocketaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streamdecksocketdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="actionserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qhttpserver\qhttpconnection.h">
+      <Filter>QHttpServer Include</Filter>
+    </ClInclude>
+    <ClInclude Include="qhttpserver\qhttprequest.h">
+      <Filter>QHttpServer Include</Filter>
+    </ClInclude>
+    <ClInclude Include="qhttpserver\qhttpresponse.h">
+      <Filter>QHttpServer Include</Filter>
+    </ClInclude>
+    <ClInclude Include="qhttpserver\qhttpserver.h">
+      <Filter>QHttpServer Include</Filter>
+    </ClInclude>
+    <ClInclude Include="qhttpserver\qhttpserverapi.h">
+      <Filter>QHttpServer Include</Filter>
+    </ClInclude>
+    <ClInclude Include="qhttpserver\qhttpserverfwd.h">
+      <Filter>QHttpServer Include</Filter>
+    </ClInclude>
+    <ClInclude Include="qhttpserver\http_parser.h">
+      <Filter>HTTP Parser</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StreamDeckSocket.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pluginmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streamdecksocketaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streamdecksocketdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_streamdecksocketaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_streamdecksocketdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="actionserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\moc_qhttprequest.cpp">
+      <Filter>QHttpServer MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\moc_qhttpresponse.cpp">
+      <Filter>QHttpServer MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\moc_qhttpserver.cpp">
+      <Filter>QHttpServer MOC</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\qhttpconnection.cpp">
+      <Filter>QHttpServer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\qhttprequest.cpp">
+      <Filter>QHttpServer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\qhttpresponse.cpp">
+      <Filter>QHttpServer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\qhttpserver.cpp">
+      <Filter>QHttpServer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_actionserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\http_parser.c">
+      <Filter>HTTP Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="qhttpserver\moc_qhttpconnection.cpp">
+      <Filter>QHttpServer MOC</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
