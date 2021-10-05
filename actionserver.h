@@ -16,7 +16,10 @@ public:
 
 private:
 	void enumerateActions(DzJsonWriter *json);
-	int executeAction(QString action);
+	void enumerateCustomActions(DzJsonWriter *json);
+	void enumerateDAZActions(DzJsonWriter *json);
+	int executeCustomAction(QString action);
+	int executeDAZAction(QString action);
 
 public slots:
 	void handleRequest(QHttpRequest *req, QHttpResponse *resp);
