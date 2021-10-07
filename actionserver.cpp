@@ -181,7 +181,8 @@ void ActionServer::enumerateDAZActions(DzJsonWriter *json)
 		if ((!path.isEmpty()) && (QFileInfo(path).exists())) {
 			json->addMember("icon", path);
 		}
-		json->addMember("name", ac->objectName());
+
+		json->addMember("name", QString(ac->metaObject()->className()));
 		json->addMember("text", ac->text());
 		json->addMember("custom", false);
 		json->finishObject();
