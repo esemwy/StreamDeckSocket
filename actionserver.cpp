@@ -1,5 +1,6 @@
 ##include "actionserver.h"
 
+#include <QtCore/QObject>
 #include <QtCore/QCoreApplication>
 #include <QtCore/QRegExp>
 #include <QtCore/QStringList>
@@ -40,9 +41,11 @@ void ActionServer::handleRequest(QHttpRequest* req, QHttpResponse* resp)
 	QRegExp action("^/action/(.*)$");
 	QRegExp dazaction("^/dazaction/(.*)$");
 
+
 	QRegExp transform("^/transform/(.*)$");
 	QRegExp toDefault("^/toDefault/(.*)$");
 	QRegExp setSensitivity("^/setSensitivity/(.*)$");
+
 	if (exp.indexIn(req->path()) != -1)
 	{
 		resp->setHeader("Content-Type", "text/html");
@@ -71,7 +74,9 @@ void ActionServer::handleRequest(QHttpRequest* req, QHttpResponse* resp)
 	else if (action.indexIn(req->path()) != -1) {
 		QString guid = action.capturedTexts()[1];
 		int r = executeCustomAction(guid);
-		QBuffer* buf = new QBuffer();
+
+		QBuffer *buf = new QBuffer();
+
 		buf->open(QIODevice::WriteOnly);
 		DzJsonWriter* json = new DzJsonWriter(buf);
 		resp->setHeader("Content-Type", "application/json");
@@ -86,7 +91,25 @@ void ActionServer::handleRequest(QHttpRequest* req, QHttpResponse* resp)
 		resp->end(buf->buffer());
 		delete json;
 		delete buf;
+	}
+	else if (dazaction.indexIn(req->path()) != -1) {
+		QString name = dazaction.capturedTexts()[1];
+		int r = executeDAZAction(name);
+		QBuffer *buf = new QBuffer();
+		buf->open(QIODevice::WriteOnly);
+		DzJsonWriter *json = new DzJsonWriter(buf);
+		resp->setHeader("Content-Type", "application/json");
+		resp->setHeader("Access-Control-Allow-Origin", "*");
+		resp->writeHead(200);
+		json->startObject();
+		json->addMember("value", r);
+		json->addMember("status", (r == -1 ? "failed" : "ok"));
+		json->finishObject();
+		buf->close();
 
+		resp->end(buf->buffer());
+		delete json;
+		delete buf;
 	}
 	else if (dazaction.indexIn(req->path()) != -1) {
 		QString name = dazaction.capturedTexts()[1];
@@ -308,7 +331,9 @@ int ActionServer::executeCustomAction(QString action)
 	int ix = am->findCustomAction(action);
 	if (ix != -1) {
 		dzApp->debug(QString("executeCustomAction: %1 <-> %2").arg(am->getCustomActionText(ix)).arg(action));
-		DzAction* cu = am->getCustomAction(ix);
+
+		DzAction *cu = am->getCustomAction(ix);
+
 		cu->trigger();
 	}
 	return ix;
@@ -319,7 +344,9 @@ int ActionServer::executeDAZAction(QString action)
 	DzMainWindow* mw = dzApp->getInterface();
 	DzActionMgr* am = mw->getActionMgr();
 
-	DzAction* ac = am->findAction(action);
+
+	DzAction *ac = am->findAction(action);
+
 	if (ac) {
 		dzApp->debug(QString("executeDAZAction: %1").arg(action));
 		ac->trigger();
@@ -332,7 +359,9 @@ int ActionServer::executeDAZAction(QString action)
 	return 0;
 }
 
-void ActionServer::enumerateActions(DzJsonWriter* json)
+
+void ActionServer::enumerateActions(DzJsonWriter *json)
+
 {
 	json->startArray();
 	enumerateCustomActions(json);
@@ -340,10 +369,12 @@ void ActionServer::enumerateActions(DzJsonWriter* json)
 	json->finishArray();
 }
 
-void ActionServer::enumerateCustomActions(DzJsonWriter* json)
+
+void ActionServer::enumerateCustomActions(DzJsonWriter *json)
 {
-	DzMainWindow* mw = dzApp->getInterface();
-	DzActionMgr* am = mw->getActionMgr();
+	DzMainWindow    *mw = dzApp->getInterface();
+	DzActionMgr		*am = mw->getActionMgr();
+
 
 	int nActions = am->getNumCustomActions();
 	for (int i = 0; i < nActions; i++) {
@@ -360,15 +391,18 @@ void ActionServer::enumerateCustomActions(DzJsonWriter* json)
 	}
 }
 
-void ActionServer::enumerateDAZActions(DzJsonWriter* json)
+
+void ActionServer::enumerateDAZActions(DzJsonWriter *json)
 {
-	DzMainWindow* mw = dzApp->getInterface();
-	DzActionMgr* am = mw->getActionMgr();
+	DzMainWindow    *mw = dzApp->getInterface();
+	DzActionMgr		*am = mw->getActionMgr();
 
 	int nActions = am->getNumActions();
 	for (int i = 0; i < nActions; i++) {
 		json->startObject();
-		DzAction* ac = am->getAction(i);
+
+		DzAction *ac = am->getAction(i);
+
 		QString path = ac->getIconFile();
 		if ((!path.isEmpty()) && (QFileInfo(path).exists())) {
 			json->addMember("icon", path);

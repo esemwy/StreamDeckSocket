@@ -16,13 +16,14 @@ public:
 	ActionServer();
 
 private:
-	void enumerateActions(DzJsonWriter* json);
-	void enumerateCustomActions(DzJsonWriter* json);
-	void enumerateDAZActions(DzJsonWriter* json);
+
+	void enumerateActions(DzJsonWriter *json);
+	void enumerateCustomActions(DzJsonWriter *json);
+	void enumerateDAZActions(DzJsonWriter *json);
 	int executeCustomAction(QString action);
 	int executeDAZAction(QString action);
-
-	float ActionServer::getPropertyAsPercent(DzFloatProperty* prop);
+	
+  float ActionServer::getPropertyAsPercent(DzFloatProperty* prop);
 
 public slots:
 	void handleRequest(QHttpRequest* req, QHttpResponse* resp);
