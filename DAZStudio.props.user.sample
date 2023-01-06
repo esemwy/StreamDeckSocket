@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <DAZ_SDK>C:\Program Files\DAZ 3D\DAZStudio4.5+ SDK</DAZ_SDK>
+    <DAZ_STUDIO>C:\Program Files\DAZ 3D\DAZStudio4</DAZ_STUDIO>
+  </PropertyGroup>
+  <ItemGroup>
+    <BuildMacro Include="DAZ_SDK">
+      <Value>$(DAZ_SDK)</Value>
+    </BuildMacro>
+    <BuildMacro Include="DAZ_STUDIO">
+      <Value>$(DAZ_STUDIO)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
