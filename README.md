@@ -1,6 +1,5 @@
 # StreamDeckSocket
-This listens on port 8080 of localhost. If the port is inconvenient, change it in "qhttpserver.h" as LISTEN_PORT 
-do not change the LISTEN_ADDRESS unless you know what you mean to do.
+This listens on port 8080 of localhost by default, but can be changed in DAZ Studio under Edit -> Stream Deck.
 
 The webserver accepts two paths:
  * http://localhost:8080/enumerate     -- returns all custom actions in a JSON object.

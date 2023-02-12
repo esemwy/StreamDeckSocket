@@ -34,7 +34,6 @@
 #include <QtNetwork/QHostAddress>
 
 #define LISTEN_ADDRESS QHostAddress::LocalHost
-#define LISTEN_PORT 8080
 
 /// Maps status codes to string reason phrases
 extern QHash<int, QString> STATUS_CODES;
