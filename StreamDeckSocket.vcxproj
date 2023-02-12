@@ -140,6 +140,7 @@
     <ClInclude Include="qhttpserver\qhttpserverapi.h" />
     <ClInclude Include="qhttpserver\qhttpserverfwd.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="settings.h" />
     <ClInclude Include="streamdecksocketaction.h" />
     <ClInclude Include="streamdecksocketdlg.h" />
     <ClInclude Include="version.h" />

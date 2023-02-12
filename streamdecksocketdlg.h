@@ -21,13 +21,9 @@ information about the DAZ Studio SDK.
 /*****************************
 Include files
 *****************************/
+#include <QtGui/QSpinBox>
 
 #include <dzbasicdialog.h>
-
-/****************************
-Forward declarations
-****************************/
-class QPushButton;
 
 /*****************************
 Class definitions
@@ -50,6 +46,15 @@ public:
 	/** Destructor **/
 	virtual ~StreamDeckSocketDlg() {}
 
+	uint16_t getPort();
+	
+private:
+
+	QSpinBox* sbPort;
+
+private slots:
+
+	void		useDefaultPort();
 };
 
 #endif // STREAM_DECK_SOCKET_DLG_H

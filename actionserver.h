@@ -16,7 +16,9 @@ public:
 	ActionServer();
 
 private:
+	QHttpServer* server;
 
+	void start();
 	void enumerateActions(DzJsonWriter *json);
 	void enumerateCustomActions(DzJsonWriter *json);
 	void enumerateDAZActions(DzJsonWriter *json);
@@ -27,4 +29,5 @@ private:
 
 public slots:
 	void handleRequest(QHttpRequest* req, QHttpResponse* resp);
+	void restart();
 };

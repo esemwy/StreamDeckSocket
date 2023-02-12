@@ -1,4 +1,5 @@
 #include "actionserver.h"
+#include "settings.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QCoreApplication>
@@ -15,6 +16,7 @@
 #include <dzjsonwriter.h>
 #include <dzapp.h>
 #include <dzmainwindow.h>
+#include <dzappsettings.h>
 #include <dzactionmgr.h>
 #include <dzaction.h>
 #include "dzbone.h"
@@ -25,14 +27,33 @@
 
 ActionServer::ActionServer()
 {
-	QHttpServer* server = new QHttpServer(this);
-	connect(server, SIGNAL(newRequest(QHttpRequest*, QHttpResponse*)),
+	this->start();
+}
+
+void ActionServer::start()
+{
+	bool portSet;
+	DzAppSettings settings(STREAM_DECK_SETTINGS_NAME);
+	uint16_t port = settings.getIntValue(STREAM_DECK_SETTINGS_PORT_NAME, STREAM_DECK_DEFAULT_PORT, &portSet);
+	if (!portSet)
+		settings.setIntValue(STREAM_DECK_SETTINGS_PORT_NAME, port);
+
+	this->server = new QHttpServer(this);
+	connect(this->server, SIGNAL(newRequest(QHttpRequest*, QHttpResponse*)),
 		this, SLOT(handleRequest(QHttpRequest*, QHttpResponse*)));
+
 	/*
-	 * FYI - Address and Port are #define'd in "qhttpserver.h"
+	 * FYI - Address is #define'd in "qhttpserver.h"
 	 * Default is (QHostAddress::LocalHost, 8080)
 	 */
-	server->listen(LISTEN_ADDRESS, LISTEN_PORT);
+	this->server->listen(LISTEN_ADDRESS, port);
+}
+
+void ActionServer::restart()
+{
+	this->server->close();
+	this->server->deleteLater();
+	this->start();
 }
 
 void ActionServer::handleRequest(QHttpRequest* req, QHttpResponse* resp)

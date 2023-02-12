@@ -61,7 +61,6 @@ QHttpConnection::QHttpConnection(QTcpSocket *socket, QObject *parent)
 
 QHttpConnection::~QHttpConnection()
 {
-    delete m_socket;
     m_socket = 0;
 
     free(m_parser);
@@ -69,12 +68,16 @@ QHttpConnection::~QHttpConnection()
 
     delete m_parserSettings;
     m_parserSettings = 0;
+
+    delete m_request;
+    m_request = 0;
 }
 
 void QHttpConnection::socketDisconnected()
 {
-    deleteLater();
     invalidateRequest();
+    m_socket->deleteLater();
+    deleteLater();
 }
 
 void QHttpConnection::invalidateRequest()
@@ -228,6 +231,7 @@ int QHttpConnection::HeadersComplete(http_parser *parser)
         response->m_keepAlive = false;
 
     connect(theConnection, SIGNAL(destroyed()), response, SLOT(connectionClosed()));
+    connect(theConnection, SIGNAL(destroyed()), theConnection->m_request, SLOT(deleteLater()));
     connect(response, SIGNAL(done()), theConnection, SLOT(responseDone()));
 
     // we are good to go!
@@ -291,7 +295,6 @@ int QHttpConnection::HeaderValue(http_parser *parser, const char *at, int length
 
 int QHttpConnection::Body(http_parser *parser, const char *at, int length)
 {
-	//int truncatedLength = static_cast<int>(std::min<std::size_t>(length, (std::numeric_limits<int>::max)()));
     QHttpConnection *theConnection = static_cast<QHttpConnection *>(parser->data);
     Q_ASSERT(theConnection->m_request);
 

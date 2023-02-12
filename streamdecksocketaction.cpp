@@ -21,11 +21,13 @@
 #include <QtGui/QMessageBox>
 
 #include "dzapp.h"
+#include "dzappsettings.h"
 #include "dzmainwindow.h"
 
 #include "streamdecksocketdlg.h"
 #include "streamdecksocketaction.h"
 #include "actionserver.h"
+#include "settings.h"
 
 ///////////////////////////////////////////////////////////////////////
 // DzAFirstPluginAction
@@ -34,11 +36,8 @@
 /**
 **/
 StreamDeckSocketAction::StreamDeckSocketAction() :
-	DzEditAction( "Stream Deck", "Stream Deck Configuration" )
+	DzEditAction( "Stream Deck", "Stream Deck Settings" )
 {
-	/**
-		Create a new action with the menu text "Hello" and description "Test the Hello action"
-	**/
 }
 
 /**
@@ -51,10 +50,6 @@ void StreamDeckSocketAction::init()
 **/
 void StreamDeckSocketAction::executeAction()
 {
-	/**
-		When the action is activated, use the DzAFirstPluginDlg class to display a dialog
-	**/
-
 	// Check if the main window has been created yet.
 	// If it hasn't, alert the user and exit early.
 
@@ -74,12 +69,9 @@ void StreamDeckSocketAction::executeAction()
 	StreamDeckSocketDlg *dlg = new StreamDeckSocketDlg( mw );
 	if( dlg->exec() != QDialog::Accepted )
 	{
-		QMessageBox::information( dzApp->getDialogParent(), tr("Information"),
-			tr("The dialog was rejected."), QMessageBox::Ok );
-
 		return;
 	}
 
-	QMessageBox::information( dzApp->getDialogParent(), tr("Information"),
-		tr("The dialog was accepted."), QMessageBox::Ok );
+	DzAppSettings( STREAM_DECK_SETTINGS_NAME ).setIntValue( STREAM_DECK_SETTINGS_PORT_NAME, dlg->getPort() );
+	m_server->restart();
 }
